@@ -25,7 +25,7 @@ mvn clean:clean compile:compile exec:java -Dmongo=localhost:27017 -Dinput=sample
 
 Execution:
 
-java –Xmx8192m -jar MongoDB-Java-WordCount-1.0-SNAPSHOT.jar -Dmongo=localhost:27017 -Dinput=sample_input.xml
+java –Xmx8192m -Dmongo=localhost:27017 -Dinput=sample_input.xml -jar MongoDB-Java-WordCount-1.0-SNAPSHOT.jar
 
   
 Output:
@@ -35,3 +35,6 @@ Console Output and Dev Execution screenshots can be found in the root
 > ConsoleOutput.txt
 > IntelliJ-Dev-Run-ScreenShot-1.png
 > IntelliJ-Dev-Run-ScreenShot-2.png 
+> MongoDb-Screenshot-1.png
+> MongoDB-InputCollection-Screenshot-1.png
+> MongoDB-WordCountCollection-Screenshot-1.png
