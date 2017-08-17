@@ -1,0 +1,43 @@
+"C:\Program Files (x86)\Java\jdk1.8.0_121\bin\java" -Dmongo=localhost:27017 -Dinput=sample_input.xml "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.2.1\lib\idea_rt.jar=52748:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.2.1\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\charsets.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\deploy.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\ext\access-bridge-32.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\ext\cldrdata.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\ext\dnsns.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\ext\jaccess.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\ext\jfxrt.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\ext\localedata.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\ext\nashorn.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\ext\sunec.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\ext\sunjce_provider.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\ext\sunmscapi.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\ext\sunpkcs11.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\ext\zipfs.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\javaws.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\jce.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\jfr.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\jfxswt.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\jsse.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\management-agent.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\plugin.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\resources.jar;C:\Program Files (x86)\Java\jdk1.8.0_121\jre\lib\rt.jar;C:\Users\New User\Prasanth\MyWksp\MongoDB-Java-WordCount\target\classes;C:\Users\New User\.m2\repository\org\mongodb\mongo-java-driver\2.12.3\mongo-java-driver-2.12.3.jar;C:\Users\New User\.m2\repository\org\json\json\20160807\json-20160807.jar" com.sai.sri.siddhi.mongodb.client.MainApp
+Reading Input File: sample_input.xml
+Reading File: sample_input.xml
+file contents: <?xml version="1.0" encoding="UTF-8" ?>
+<hello>
+    <world> how are you ?</world>
+</hello>
+Reading File: map.js
+file contents: function map() {
+    // javascript map function to be registered in mongo db
+    var cnt = this.content;
+    var words = cnt.match(/\w+/g);
+    if (words == null) {
+        return;
+    }
+    for (var i = 0; i < words.length; i++) {
+        emit({ word:words[i] }, { count:1 });
+    }
+}
+Reading File: reduce.js
+file contents: function reduce(key, counts) {
+    // javascript reduce function to be registered in mongo db
+    var cnt = 0;
+    for (var i = 0; i < counts.length; i++) {
+        cnt = cnt + counts[i].count;
+    }
+    return { count:cnt };
+}
+MapReduce results: 
+{ "_id" : { "word" : "0"} , "value" : { "count" : 1.0}}
+{ "_id" : { "word" : "1"} , "value" : { "count" : 1.0}}
+{ "_id" : { "word" : "8"} , "value" : { "count" : 1.0}}
+{ "_id" : { "word" : "UTF"} , "value" : { "count" : 1.0}}
+{ "_id" : { "word" : "are"} , "value" : { "count" : 1.0}}
+{ "_id" : { "word" : "encoding"} , "value" : { "count" : 1.0}}
+{ "_id" : { "word" : "hello"} , "value" : { "count" : 2.0}}
+{ "_id" : { "word" : "how"} , "value" : { "count" : 1.0}}
+{ "_id" : { "word" : "version"} , "value" : { "count" : 1.0}}
+{ "_id" : { "word" : "world"} , "value" : { "count" : 2.0}}
+{ "_id" : { "word" : "xml"} , "value" : { "count" : 1.0}}
+{ "_id" : { "word" : "you"} , "value" : { "count" : 1.0}}
+
+Process finished with exit code 0
